@@ -303,6 +303,47 @@
   .title_spr .title_spr_num {
     color: var(--tco);
   }
+
+
+  .iframeBox {
+    position: fixed;
+    z-index: 99;
+    transform: translateX(100vw);
+    opacity: 0;
+    width: 888px;
+    height: 737px;
+  }
+
+  .iframeKeys {
+    animation: iframeKey 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+  }
+
+  .iframeBox .oIframe {
+    width: 100%;
+    height: 100%;
+  }
+
+  .iframeBox .removeIcon {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 100;
+    color: #fff;
+    font-size: 32px;
+    cursor: pointer;
+  }
+
+  @keyframes iframeKey {
+    0% {
+      transform: translateX(100vw);
+      opacity: 0;
+    }
+
+    100% {
+      transform: translateX(50%);
+      opacity: 1;
+    }
+  }
 </style>
 
 <!-- 总览左 -->
@@ -476,5 +517,10 @@
     </table>
   </div>
 </div>
-<div id="iframeHtml"></div>
+
+<div id="iframeBox" class="iframeBox">
+  <iframe id="oIframe" class="oIframe" src="module/video.html" frameborder="0"></iframe>
+  <span id="removeIcon" class="glyphicon glyphicon-remove removeIcon" aria-hidden="true"></span>
+</div>
+
 <script src="../js/module/specialEquipment.js" type="text/javascript" charset="utf-8"></script>

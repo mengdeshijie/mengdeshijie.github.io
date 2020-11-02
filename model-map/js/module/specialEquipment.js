@@ -1,17 +1,13 @@
 var tableIndex = 0;
 publicObj.specialEquipment = {
-    popupBox: [{
-        replicator: "翁峰",
-        telephone: "18621176278",
-        maintenance: fnNewDate(15, "2020-10-08"),
-        maintainer: ["张三", "李四", "王五"]
-    }],
+    videoSrc: "",
+    videoClose:false,
     init() {
         this.fnAjax();
         this.fnRuning();
         this.fnTable();
         this.fnPopup();
-        fnHtml("iframeHtml");
+        // fnHtml("iframeHtml");
         this.fnClick();
     },
     fnAjax() {
@@ -25,13 +21,23 @@ publicObj.specialEquipment = {
                     dataShadow.push(res.bar.yMax);
                 };
                 setTimeout(function () {
-                    fnChart.fnPie("specialEquipment_pie1", [
-                        { value: 100, name: '' },
-                        { value: 0, name: '' },
+                    fnChart.fnPie("specialEquipment_pie1", [{
+                            value: 100,
+                            name: ''
+                        },
+                        {
+                            value: 0,
+                            name: ''
+                        },
                     ]);
-                    fnChart.fnPie("specialEquipment_pie2", [
-                        { value: 50, name: '' },
-                        { value: 0, name: '' },
+                    fnChart.fnPie("specialEquipment_pie2", [{
+                            value: 50,
+                            name: ''
+                        },
+                        {
+                            value: 0,
+                            name: ''
+                        },
                     ]);
                 }, 1000);
             }
@@ -75,7 +81,12 @@ publicObj.specialEquipment = {
         });
     },
     fnPopup() {
-        var a = false, b = false, aIndex = null, bIndex = null, cIndex = null, popupBox = this.popupBox;
+        var a = false,
+            b = false,
+            aIndex = null,
+            bIndex = null,
+            cIndex = null,
+            self = this;
         $(".centerHtml").on("mouseover", "#equipmentTbody tr", function () {
             aIndex = $(this).index();
             a = true
@@ -91,7 +102,9 @@ publicObj.specialEquipment = {
                 let oIndex = $(this).index();
                 let selectId = $(this).data("id");
                 publicObj.fnAjaxFloor("system/cesdevice/" + selectId, (d) => {
-                    let { data } = d;
+                    let {
+                        data
+                    } = d;
                     bIndex = oIndex;
                     b = true;
                     $(".popup_box .bum_text").text(data.code.substr(10));
@@ -105,7 +118,8 @@ publicObj.specialEquipment = {
                     }
                     $(".popup_box .replicator").text(data.person);
                     $(".popup_box .telephone").text(data.tel);
-                    let maintenance = fnNewDate(6, data.wbDate), td = "";
+                    let maintenance = fnNewDate(6, data.wbDate),
+                        td = "";
                     for (let k in maintenance) {
                         td += `<tr><td>${maintenance[k]}</td><td>${data.person}</td></tr>`;
                     }
@@ -125,15 +139,27 @@ publicObj.specialEquipment = {
                     } else {
                         $(".popup_box").removeClass("popup_box_active2").addClass("popup_box_active1");
                     }
+
                     $(".table_box .table>tbody>tr").eq(oIndex).addClass("activel").siblings().removeClass("activel");
                     fnIconfont(a, b, aIndex, bIndex);
+                    if(self.videoClose){
+                        self.videoClose =false;
+                        $("#iframeBox").removeClass("iframeKeys");
+                    }
+                    if (data.camera) {
+                        self.videoSrc = data.camera;
+                        $("#supervise").attr("data-id", data.camera);
+                        let oIframe = window.parent.document.getElementById('oIframe');
+                        oIframe.contentWindow.location.reload(true);
+                    } else {
+                        self.videoSrc = "";
+                    }
                 });
             } else {
                 let oIndex = $(this).index();
                 bIndex = oIndex;
                 b = true;
-                let data = [
-                    {
+                let data = [{
                         checkTime: "2021.11.18",
                         code: "1200310108201602000",
                         compName: "上海远运投资管理有限公司",
@@ -213,7 +239,6 @@ publicObj.specialEquipment = {
                 $(".table_box .table>tbody>tr").eq(oIndex).addClass("activel").siblings().removeClass("activel");
                 fnIconfont(a, b, aIndex, bIndex);
             }
-
         });
         $(".popup_box .close").click(function () {
             bIndex = $(this).index();
@@ -226,16 +251,19 @@ publicObj.specialEquipment = {
     },
     fnEquipmentTr(selectId) {
         if (selectId == "all") {
-            let data = publicObj.selectAll, tr = "";
+            let data = publicObj.selectAll,
+                tr = "";
             for (let i = 0; i < data.length; i++) {
                 let code = data[i].code.substr(10);
                 tr += `<tr data-id="${data[i].id}"><td><div class="normal_num">${i + 1}</div></td><td>${code}</td><td><span class="iconfont icon-weizhi"></span>${data[i].locationName}</td><td><span class="iconfont icon-${data[i].runStatus == "正常" ? "gouxuankuangxuanzhong" : "jurassic_warning"}"></span></td></tr>`;
             }
             $("#equipmentTbody").html(tr);
-            $("#nHome").text(data.length+"家");
+            $("#nHome").text(data.length + "家");
         } else {
             publicObj.fnAjaxFloor("system/cesdevice/" + selectId, (d) => {
-                let { data } = d;
+                let {
+                    data
+                } = d;
                 let tr = `<tr data-id="${data.id}"><td><div class="normal_num">1</div></td><td>${data.code.substr(10)}</td><td><span class="iconfont icon-weizhi"></span>${data.locationName}</td><td><span class="iconfont icon-${data.runStatus == "正常" ? "gouxuankuangxuanzhong" : "jurassic_warning"}"></span></td></tr>`;
                 $("#equipmentTbody").html(tr);
             });
@@ -243,11 +271,12 @@ publicObj.specialEquipment = {
         }
     },
     fnClick() {
+        let self = this;
         $(".centerHtml").off("changed.bs.select").on('changed.bs.select', '#mySelect', () => {
-            // console.log(selectId)
             let selectId = $('#mySelect').selectpicker('val');
             if (selectId == 'a1' || selectId == 'a2' || selectId == 'a3' || selectId == 'a4') {
-                let data = publicObj.selectAll.filter((el) => el.id == selectId), tr = "";
+                let data = publicObj.selectAll.filter((el) => el.id == selectId),
+                    tr = "";
                 for (let i = 0; i < data.length; i++) {
                     let code = data[i].code.substr(10);
                     tr += `<tr data-id="${data[i].id}"><td><div class="normal_num">${i + 1}</div></td><td>${code}</td><td><span class="iconfont icon-weizhi"></span>${data[i].location}</td><td><span class="iconfont icon-${data[i].runStatus == "正常" ? "gouxuankuangxuanzhong" : "jurassic_warning"}"></span></td></tr>`;
@@ -256,6 +285,18 @@ publicObj.specialEquipment = {
             } else {
                 this.fnEquipmentTr(selectId);
             }
+        });
+        $("#supervise").click(function () {
+            self.videoClose = true;
+            if (self.videoSrc) {
+                $("#iframeBox").addClass("iframeKeys");
+            } else {
+                publicObj.fnAlert("暂无视频", 3);
+            }
+        });
+        $("#removeIcon").click(function () {
+            self.videoClose = false;
+            $("#iframeBox").removeClass("iframeKeys");
         });
     }
 }
@@ -275,6 +316,7 @@ function fnIconfont(a, b, aIndex, bIndex) {
     }
 
 }
+
 function addDate(dd, dadd) {
     let a = new Date(dd)
     a = a.valueOf()
@@ -282,6 +324,7 @@ function addDate(dd, dadd) {
     a = new Date(a);
     return a;
 }
+
 function fnNewDate(n, data) {
     let now = new Date();
     if (data) {
