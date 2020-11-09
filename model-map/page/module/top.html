@@ -51,7 +51,7 @@
 		<div class="handle_sel flex spaceBetween alignCenter" data-id="yjd">
 			<img src="../img/overview_set.png" alt="">眼镜店
 		</div>
-		<div class="handle_sel flex spaceBetween alignCenter" data-id="gl">
+		<div class="handle_sel flex spaceBetween alignCenter gl" data-id="gl">
 			<img src="../img/overview_set.png" alt="">锅炉使用单位
 		</div>
 		<div class="handle_sel flex spaceBetween alignCenter" data-id="4s">
@@ -121,6 +121,8 @@
 								equipTo("show");
 								foodTo("hide", "");
 								self.fnCenterInit("hide", "overview_set1");
+								labelTo("gl", "show");
+								$(".gl>img").attr("src", "../img/overview_set.png");
 							}
 						});
 						break;

@@ -1,7 +1,7 @@
 var tableIndex = 0;
 publicObj.specialEquipment = {
     videoSrc: "",
-    videoClose:false,
+    videoClose: false,
     init() {
         this.fnAjax();
         this.fnRuning();
@@ -70,37 +70,36 @@ publicObj.specialEquipment = {
                 $(".title_spr").show()
                 publicObj.fnAreaHtml('特种设备', 1);
             } else {
+                $("#boiler tr").show();
                 $(".table_box .table2").show();
                 $(".table_box .table1").hide();
-                $(".title_spr").hide()
+                $(".title_spr").hide();
                 publicObj.fnAreaHtml('特种设备', 3);
             }
-
             $(".popup_box").removeClass("popup_box_active1").addClass("popup_box_active2");
-            $(".table_box .table>tbody>tr").removeClass("activel")
+            $(".table_box .table>tbody>tr").removeClass("activel");
         });
     },
     fnPopup() {
-        var a = false,
-            b = false,
-            aIndex = null,
+        var b = false,
             bIndex = null,
             cIndex = null,
-            self = this;
-        $(".centerHtml").on("mouseover", "#equipmentTbody tr", function () {
-            aIndex = $(this).index();
-            a = true
-            fnIconfont(a, b, aIndex, bIndex);
+            wbDate = "";
+        $(".centerHtml").on("mouseover", ".equipmentTbody tr", function () {
+            $(this).find(".icon-weizhi").addClass("activel");
         });
-        $(".centerHtml").on("mouseout", "#equipmentTbody tr", function () {
-            aIndex = $(this).index();
-            a = false
-            fnIconfont(a, b, aIndex, bIndex);
+        $(".centerHtml").on("mouseout", ".equipmentTbody tr", function () {
+            if ($(this).hasClass("activel")) {
+                $(this).siblings().find(".icon-weizhi").removeClass("activel");
+            } else {
+                $(this).find(".icon-weizhi").removeClass("activel");
+            }
         });
-        $(".centerHtml").on("click", "#equipmentTbody tr", function () {
+        $(".centerHtml").on("click", ".equipmentTbody tr", function () {
+            let selectId = $(this).data("id");
+            let self = $(this);
             if (tableIndex == 0) {
                 let oIndex = $(this).index();
-                let selectId = $(this).data("id");
                 publicObj.fnAjaxFloor("system/cesdevice/" + selectId, (d) => {
                     let {
                         data
@@ -118,8 +117,9 @@ publicObj.specialEquipment = {
                     }
                     $(".popup_box .replicator").text(data.person);
                     $(".popup_box .telephone").text(data.tel);
-                    let maintenance = fnNewDate(6, data.wbDate),
-                        td = "";
+                    let maintenance = fnNewDate(6, data.wbDate);
+                    wbDate = data.wbDate;
+                    let td = "";
                     for (let k in maintenance) {
                         td += `<tr><td>${maintenance[k]}</td><td>${data.person}</td></tr>`;
                     }
@@ -139,11 +139,8 @@ publicObj.specialEquipment = {
                     } else {
                         $(".popup_box").removeClass("popup_box_active2").addClass("popup_box_active1");
                     }
-
-                    $(".table_box .table>tbody>tr").eq(oIndex).addClass("activel").siblings().removeClass("activel");
-                    fnIconfont(a, b, aIndex, bIndex);
-                    if(self.videoClose){
-                        self.videoClose =false;
+                    if (self.videoClose) {
+                        self.videoClose = false;
                         $("#iframeBox").removeClass("iframeKeys");
                     }
                     if (data.camera) {
@@ -161,7 +158,7 @@ publicObj.specialEquipment = {
                 b = true;
                 let data = [{
                         checkTime: "2021.11.18",
-                        code: "1200310108201602000",
+                        code: "1200310108201602001",
                         compName: "上海远运投资管理有限公司",
                         deviceType: "电梯",
                         id: 8,
@@ -219,9 +216,14 @@ publicObj.specialEquipment = {
                 $(".popup_box .person").text(data[oIndex].person);
                 $(".popup_box .tel").text(data[oIndex].tel);
                 $("#iconAbnormal").attr("class", `iconfont icon-${data[oIndex].runStatus == "正常" ? "gouxuankuangxuanzhong" : "jurassic_warning"}`);
-                if (data[oIndex].location) {
-                    $(".popup_box .floor").text(data[oIndex].location);
-                    moveTo(data[oIndex].location);
+                let maintenance = fnNewDate(6, wbDate);
+                let td = "";
+                for (let k in maintenance) {
+                    td += `<tr><td>${maintenance[k]}</td><td>${data[oIndex].person}</td></tr>`;
+                }
+                $("#maintainer").html(td);
+                if (selectId) {
+                    moveTo("锅炉定位-" + selectId);
                 }
                 if (bIndex != cIndex) {
                     if (cIndex == null) {
@@ -236,17 +238,16 @@ publicObj.specialEquipment = {
                 } else {
                     $(".popup_box").removeClass("popup_box_active2").addClass("popup_box_active1");
                 }
-                $(".table_box .table>tbody>tr").eq(oIndex).addClass("activel").siblings().removeClass("activel");
-                fnIconfont(a, b, aIndex, bIndex);
             }
+            self.addClass("activel").siblings().removeClass("activel");
         });
         $(".popup_box .close").click(function () {
             bIndex = $(this).index();
             b = false
             cIndex = null
-            fnIconfont(a, b, aIndex, bIndex);
             $(".popup_box").removeClass("popup_box_active1").addClass("popup_box_active2");
-            $(".table_box .table>tbody>tr").removeClass("activel")
+            $(".table_box .table>tbody>tr").removeClass("activel");
+            $(".table .equipmentTbody").eq(tableIndex).find(".icon-weizhi").removeClass("activel");
         });
     },
     fnEquipmentTr(selectId) {
@@ -270,18 +271,40 @@ publicObj.specialEquipment = {
             $("#nHome").text("1家");
         }
     },
+    fnBoiler(str) {
+        tableIndex = 1;
+        $(".table_box .title>div").removeClass("activel").eq(1).addClass("activel");
+        $(".table_box .table2").show();
+        $(".table_box .table1").hide();
+        $(".title_spr").hide();
+        $("#boiler tr").each((index, item) => {
+            if ($(item).data("id") == str) {
+                $(item).show();
+            } else {
+                $(item).hide();
+            }
+        });
+        if ($(".popup_box").hasClass("popup_box_active1")) {
+            $(".popup_box").removeClass("popup_box_active1").addClass("popup_box_active2");
+            $(".table_box .table>tbody>tr").removeClass("activel");
+        }
+        publicObj.fnAreaHtml('特种设备', 3);
+    },
     fnClick() {
         let self = this;
         $(".centerHtml").off("changed.bs.select").on('changed.bs.select', '#mySelect', () => {
             let selectId = $('#mySelect').selectpicker('val');
-            if (selectId == 'a1' || selectId == 'a2' || selectId == 'a3' || selectId == 'a4') {
-                let data = publicObj.selectAll.filter((el) => el.id == selectId),
+            if (tableIndex == "1") {
+                let data = publicObj.selectAll,
                     tr = "";
+                if (selectId != "all") {
+                    data = publicObj.selectAll.filter((el) => el.id == selectId)
+                }
                 for (let i = 0; i < data.length; i++) {
                     let code = data[i].code.substr(10);
                     tr += `<tr data-id="${data[i].id}"><td><div class="normal_num">${i + 1}</div></td><td>${code}</td><td><span class="iconfont icon-weizhi"></span>${data[i].location}</td><td><span class="iconfont icon-${data[i].runStatus == "正常" ? "gouxuankuangxuanzhong" : "jurassic_warning"}"></span></td></tr>`;
                 }
-                $("#equipmentTbody").html(tr);
+                $("#boiler").html(tr);
             } else {
                 this.fnEquipmentTr(selectId);
             }
@@ -301,21 +324,6 @@ publicObj.specialEquipment = {
     }
 }
 publicObj.specialEquipment.init();
-
-function fnIconfont(a, b, aIndex, bIndex) {
-    if (b) {
-        $(".icon-weizhi").removeClass("activel");
-        $(".icon-weizhi").eq(bIndex).addClass("activel");
-    } else {
-        $(".icon-weizhi").removeClass("activel");
-    }
-    if (a) {
-        $(".icon-weizhi").eq(aIndex).addClass("activel");
-    } else {
-        $(".icon-weizhi").eq(aIndex).removeClass("activel");
-    }
-
-}
 
 function addDate(dd, dadd) {
     let a = new Date(dd)

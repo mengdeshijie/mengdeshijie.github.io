@@ -7,6 +7,7 @@
 		width: 163px;
 		margin-top: 10px;
 		margin-bottom: 14px;
+		cursor: pointer;
 	}
 
 	.margin-lf {
@@ -68,6 +69,7 @@
 		background-color: #e8380d;
 		border-radius: 3px;
 	}
+
 	.chart_box_info .num .compare2 {
 		font-size: 14px;
 		background-color: #1ee016;
@@ -99,11 +101,80 @@
 
 	.overRight .rightOverview {
 		top: 290px;
+		z-index: 10;
 	}
 
 	.regular_text {
 		font-size: 36px !important;
 		font-family: regular;
+	}
+
+	.popup_box .content_box {
+		height: 83px;
+		width: 300px;
+		display: flex;
+	}
+
+	.popup_box .content_box>div {
+		padding-left: 25px;
+		border-left: 1px solid #fff;
+		margin-left: 25px;
+	}
+
+	.popup_box .content_box .content_box_num {
+		font-size: 48px !important;
+		font-family: bold;
+		margin-right: 10px;
+	}
+
+	.bottom ul {
+		max-height: 56vh;
+		overflow-y: auto;
+	}
+
+	.bottom .title {
+		display: block;
+		padding-left: 10px;
+		line-height: 40px;
+		margin-bottom: 10px;
+		background: linear-gradient(to right, var(--zs), var(--ns));
+	}
+
+	.bottom ul li {
+		height: 30px;
+		line-height: 30px;
+		padding-left: 10px;
+		width: 300px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		text-align: left;
+		display: block;
+	}
+
+	.bottom ul li::before {
+		content: "";
+		display: inline-block;
+		width: 10px;
+		height: 10px;
+		line-height: 10px;
+		margin-right: 10px;
+		background: linear-gradient(to right, var(--zs), var(--ns));
+		border-radius: 50%;
+	}
+
+	fieldset {
+		padding: .35em .625em .75em;
+		margin: 0 2px;
+		border: 1px solid #fff;
+	}
+
+	legend {
+		color: #fff;
+		padding: .5em;
+		border: 0;
+		width: auto;
+		margin-bottom: 0px;
 	}
 </style>
 <!-- 总览左 -->
@@ -138,7 +209,8 @@
 	<div class="chart_box">
 		<div class="chart_box_info">
 			<div class="title">园区历年营收总量</div>
-			<div class="num"><span class="regular_text">2,065</span><span>亿</span><span class="compare1">2019同比11.7%↑</span></div>
+			<div class="num"><span class="regular_text">2,065</span><span>亿</span><span
+					class="compare1">2019同比11.7%↑</span></div>
 		</div>
 		<div class="chart_box_bar">
 			<div id="chart_bar1" style="width: 100%;height:100%;"></div>
@@ -147,7 +219,8 @@
 	<div class="chart_box">
 		<div class="chart_box_info">
 			<div class="title">园区历年税收总量</div>
-			<div class="num"><span class="regular_text">90.1</span><span>亿</span><span class="compare2">2019同比5.54%↓</span></div>
+			<div class="num"><span class="regular_text">90.1</span><span>亿</span><span
+					class="compare2">2019同比5.54%↓</span></div>
 		</div>
 		<div class="chart_box_bar">
 			<div id="chart_bar2" style="width: 100%;height:100%;"></div>
@@ -157,11 +230,31 @@
 		<div id="left_bar" style="width: 100%;height:200px;"></div>
 	</div>
 </div>
+
+<!-- 弹出框 -->
+<div class="popup_box">
+	<div class="close"><img src="../img/modal_delete.png" alt=""></div>
+	<div class="content_box">
+		<img id="popupBoxImg" src="../img/popup_index0.png" alt="">
+		<div>
+			<span id="popupBoxTitle" class="content_box_title">跨国公司总部数：</span>
+			<div><span id="popupBoxNum" class="content_box_num">21</span>家</div>
+		</div>
+	</div>
+	<div class="bottom">
+		<fieldset>
+			<legend>企业列表</legend>
+			<span class="title">企业名称</span>
+			<ul id="popupBoxTbody"></ul>
+		</fieldset>
+	</div>
+</div>
+
 <!-- 总览右 -->
 <div class="overview rightOverview flex column">
 	<div id="areaHtml"></div>
 	<div class="overRight" id="floorHtml">
-		<div class="right_center flex spaceBetween alignCenter wrap">
+		<div id="rightList" class="right_center flex spaceBetween alignCenter wrap">
 			<div class="right_center_box flex justifyCenter alignCenter">
 				<img src="../img/home-left1.png" alt="">
 				<div class="right_center_title">
@@ -176,7 +269,7 @@
 					<div class="center-num"><span class="regular_text">55</span><span>家</span></div>
 				</div>
 			</div>
-			<div class="right_center_box flex justifyCenter alignCenter margin-lf"  style="margin-left: -10px">
+			<div class="right_center_box flex justifyCenter alignCenter margin-lf" style="margin-left: -10px">
 				<img src="../img/home-left6.png" alt="">
 				<div class="right_center_title">
 					<div class="center-title">500强企业</div>
@@ -187,7 +280,7 @@
 				<img src="../img/home-left7.png" alt="">
 				<div class="right_center_title">
 					<div class="center-title">上市公司</div>
-					<div class="center-num"><span class="regular_text">19</span><span>家</span></div>
+					<div class="center-num"><span class="regular_text">18</span><span>家</span></div>
 				</div>
 			</div>
 			<div class="right_center_box flex justifyCenter alignCenter" style="margin-left: -7px">
@@ -204,26 +297,11 @@
 					<div class="center-num"><span class="regular_text">10</span><span>家</span></div>
 				</div>
 			</div>
-			<!-- <div class="right_center_box flex justifyCenter alignCenter" style="margin-left: 3px">
-			<img src="../img/home-left4.png" alt="">
-			<div class="right_center_title">
-				<div class="center-title">食品经营许可</div>
-				<div class="center-num">3<span>家</span></div>
-			</div>
 		</div>
-		<div class="right_center_box flex justifyCenter alignCenter">
-			<img src="../img/home-left5.png" alt="" style="margin-left: 6px">
-			<div class="right_center_title">
-				<div class="center-title">药品经营许可</div>
-				<div class="center-num">3<span>家</span></div>
-			</div>
-		</div> -->
+		<div class="chart_box flex" style="height:200px;">
+			<div id="drawPieArea" style="width: 50%;height:100%"></div>
+			<div id="left_pie1" style="width: 50%;height:100%"></div>
 		</div>
-
-	<div class="chart_box flex" style="height:200px;">
-		<div id="drawPieArea" style="width: 50%;height:100%"></div>
-		<div id="left_pie1" style="width: 50%;height:100%"></div>
 	</div>
-</div>
 
-<script src="../js/module/overview.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/module/overview.js" type="text/javascript" charset="utf-8"></script>

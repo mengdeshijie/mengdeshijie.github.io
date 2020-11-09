@@ -530,9 +530,10 @@ table .icon-jurassic_warning {
     right: 364px;
     background: linear-gradient(rgba(99, 73, 218, 0.8), rgba(135, 234, 255, 0.8));
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: flex-start;
     flex-direction: column;
+    padding-top: 178px;
     color: #fff;
     font-size: 16px;
     padding-left: 50px;
