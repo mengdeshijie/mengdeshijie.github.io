@@ -26,7 +26,6 @@ publicObj.overview = {
             let rows = d.rows;
             $("#popupBoxImg").attr("src", "../img/popup_index" + oIndex + ".png");
             $("#popupBoxTitle").text(oText + "：");
-            console.log(rows);
             $("#popupBoxNum").text(rows.length);
             let src="";
             for (let i = 0; i < rows.length; i++) {

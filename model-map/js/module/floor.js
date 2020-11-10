@@ -62,22 +62,7 @@ publicObj.floor = {
             moveTo(publicObj.selectRow.areaHomesLayer);
             this.fnEnterpriseTr(publicObj.selectRow);
             this.isChanged = false;
-        });
-        // $("#htmlUlLi").off("click").on('click', '.details', function () {
-        //     publicObj.selectRow.id = $(this).parent().data("id");
-        //     console.log($(this).parent().data("id"))
-        //     fnHtml({
-        //         id: "modalHtml",
-        //         fn: () => {
-        //             $('.modal_delete').click(function (event) {
-        //                 event.preventDefault();
-        //                 $('#modal-container').addClass('out');
-        //             });
-        //             self.isChanged = true;
-        //         }
-        //     });
-        // });
-       
+        });  
         $("#htmlUlLi").off("click").on('click', 'tr', function () {
             let oIndex = $(this).index();
             $(".table_box .table>tbody>tr").eq(oIndex).addClass("activel").siblings().removeClass("activel");

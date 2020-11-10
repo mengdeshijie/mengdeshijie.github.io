@@ -252,7 +252,6 @@ publicObj.modal = {
         $(".box_left>div .xzcfnum").text("(" + xzcfnum + ")");
         $(".box_left>div .tsjbnnum").text("(" + tsjbnnum + ")");
         $(".box_left>div .xzcfnum").text("(" + xzcfnum + ")");
-        // console.log(boxLeft)
     },
     fnTable(index) {
         let enterpriseData = this.enterpriseData;
