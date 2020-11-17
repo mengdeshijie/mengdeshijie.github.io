@@ -41,15 +41,17 @@
     }
 
     #modal-container.one {
+		z-index: 10;
         animation: unfoldIn 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
     }
-/* 
+	/* 
     #modal-container.one .modal-background .modal-center {
         transform: scale(0);
         animation: zoomIn 0.5s 0.1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
     } */
 
     #modal-container.one.out {
+		z-index: 0;
         animation: unfoldOut 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
     }
 

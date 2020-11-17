@@ -307,11 +307,12 @@
 
   .iframeBox {
     position: fixed;
+	top: 20px;
     z-index: 99;
     transform: translateX(100vw);
     opacity: 0;
     width: 888px;
-    height: 737px;
+    /* height: 737px; */
   }
 
   .iframeKeys {
@@ -518,8 +519,7 @@
   </div>
 </div>
 <div id="iframeBox" class="iframeBox">
-  <iframe id="oIframe" class="oIframe" src="module/video.html" frameborder="0"></iframe>
+  <video id="video" controls autoplay  style="width: 880px;"></video>
   <span id="removeIcon" class="glyphicon glyphicon-remove removeIcon" aria-hidden="true"></span>
 </div>
-
 <script src="../js/module/specialEquipment.js" type="text/javascript" charset="utf-8"></script>

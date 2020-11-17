@@ -2,12 +2,13 @@ var tableIndex = 0;
 publicObj.specialEquipment = {
 	videoSrc: "",
 	videoClose: false,
+	elVideo: document.getElementById('video'),
+	elHls:{},
 	init() {
 		this.fnAjax();
 		this.fnRuning();
 		this.fnTable();
 		this.fnPopup();
-		// fnHtml("iframeHtml");
 		this.fnClick();
 	},
 	fnAjax() {
@@ -97,6 +98,7 @@ publicObj.specialEquipment = {
 			}
 		});
 		$(".centerHtml").on("click", ".equipmentTbody tr", function() {
+			self.elHls.media && self.elHls.destroy();
 			let selectId = $(this).data("id");
 			let oThis = $(this);
 			if (tableIndex == 0) {
@@ -145,18 +147,18 @@ publicObj.specialEquipment = {
 						self.videoClose = false;
 						$("#iframeBox").removeClass("iframeKeys");
 					}
-
 					if (data.camera) {
 						self.videoSrc = data.camera;
-
-						$("#supervise").attr("data-id", data.camera);
-						let oIframe = window.parent.document.getElementById('oIframe');
-						oIframe.contentWindow.location.reload(true);
+						// $("#supervise").attr("data-id", data.camera);
+						self.fnVideo(self.videoSrc);
+						// let oIframe = window.parent.document.getElementById('oIframe');
+						// oIframe.contentWindow.location.reload(true);
 					} else {
 						self.videoSrc = "";
 					}
 				});
 			} else {
+				self.videoSrc = "";
 				let oIndex = $(this).index();
 				bIndex = oIndex;
 				b = true;
@@ -297,6 +299,23 @@ publicObj.specialEquipment = {
 		}
 		publicObj.fnAreaHtml('特种设备', 3);
 	},
+	fnVideo(str) {
+		let video = this.elVideo;
+		if (Hls.isSupported()) {
+			this.elHls = new Hls();
+			this.elHls.attachMedia(video);
+			this.elHls.loadSource(str);
+			this.elHls.on(Hls.Events.MANIFEST_PARSED, function() {
+				video.play();
+			});
+			this.elHls.on(Hls.Events.ERROR, function() {
+				publicObj.fnAlert("视频地址格式不正确", 3);
+				self.videoClose = false;
+				self.elHls.destroy();
+				$("#iframeBox").removeClass("iframeKeys");
+			});
+		}
+	},
 	fnClick() {
 		let self = this;
 		$(".centerHtml").off("changed.bs.select").on('changed.bs.select', '#mySelect', () => {
@@ -320,12 +339,14 @@ publicObj.specialEquipment = {
 		$("#supervise").click(function() {
 			self.videoClose = true;
 			if (self.videoSrc) {
+				!self.elHls.media && self.fnVideo(self.videoSrc);
 				$("#iframeBox").addClass("iframeKeys");
 			} else {
 				publicObj.fnAlert("暂无视频", 3);
 			}
 		});
 		$("#removeIcon").click(function() {
+			self.elHls.media && self.elHls.destroy();
 			self.videoClose = false;
 			$("#iframeBox").removeClass("iframeKeys");
 		});
