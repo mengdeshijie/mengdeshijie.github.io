@@ -3,7 +3,7 @@ publicObj.specialEquipment = {
 	videoSrc: "",
 	videoClose: false,
 	elVideo: document.getElementById('video'),
-	elHls:{},
+	elHls: {},
 	init() {
 		this.fnAjax();
 		this.fnRuning();
@@ -300,6 +300,7 @@ publicObj.specialEquipment = {
 		publicObj.fnAreaHtml('特种设备', 3);
 	},
 	fnVideo(str) {
+		let self = this;
 		let video = this.elVideo;
 		if (Hls.isSupported()) {
 			this.elHls = new Hls();
@@ -307,12 +308,6 @@ publicObj.specialEquipment = {
 			this.elHls.loadSource(str);
 			this.elHls.on(Hls.Events.MANIFEST_PARSED, function() {
 				video.play();
-			});
-			this.elHls.on(Hls.Events.ERROR, function() {
-				publicObj.fnAlert("视频地址格式不正确", 3);
-				self.videoClose = false;
-				self.elHls.destroy();
-				$("#iframeBox").removeClass("iframeKeys");
 			});
 		}
 	},
