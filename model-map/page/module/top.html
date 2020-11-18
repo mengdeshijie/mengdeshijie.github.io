@@ -101,7 +101,7 @@
 				$(this).addClass("active");
 				let eleId = $(this).data("id");
 				$(".centerHtml").attr("id", eleId);
-				eleId != "specialEquipmentHtml" && publicObj.specialEquipment.elHls.media && publicObj.specialEquipment.elHls.destroy();
+				eleId != "specialEquipmentHtml" && publicObj.specialEquipment.elHls && publicObj.specialEquipment.elHls.media && publicObj.specialEquipment.elHls.destroy();
 				switch (eleId) {
 					case "overviewHtml":
 						fnHtml({
