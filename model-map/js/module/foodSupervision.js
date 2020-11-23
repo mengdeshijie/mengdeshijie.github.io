@@ -16,7 +16,7 @@ publicObj.foodSupervision = {
                     dataShadow.push(res.bar4.yMax);
                 };
                 setTimeout(function () {
-                    fnChart.fnBarY2("foodSupervision_bar1", res.bar5.data, res.bar5.yData, '告警数分析');
+                    fnChart.fnBarY2("foodSupervision_bar1", res.bar6.data, res.bar6.yData, '告警数分析');
                     fnChart.fnPie1("foodSupervision_bar2", res.bar4.data, res.bar4.yData, '告警企业分析');
                     fnChart.fnPie1("foodSupervision_bar4", res.foodSupervision_bar4.data, res.foodSupervision_bar4.yData, '近一周', "#fff");
                     fnChart.fnBar("foodSupervision_bar3", res.foodSupervision_bar3.data, res.foodSupervision_bar3.yData, res.foodSupervision_bar3.yMax, '告警因素分析');
