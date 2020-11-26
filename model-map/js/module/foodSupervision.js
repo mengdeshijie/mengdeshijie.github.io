@@ -7,6 +7,7 @@ publicObj.foodSupervision = {
         this.fnAjax();
         this.fnPopup();
         fnHtml("iframeHtml");
+        this.fnLeftBtnHtml();
         this.fnClick();
     },
     fnAjax() {
@@ -125,10 +126,20 @@ publicObj.foodSupervision = {
         $("#btnImgModel").removeClass("active");
         $("#foodImgModel img").eq(index).attr("src", "../img/foodSupervision/" + oSrc + ".png");
     },
+    fnLeftBtnHtml() {
+        fnHtml("foodZhuiSu");
+        fnHtml({
+            id: "foodAnXinJian",
+            fn: () => {
+                this.videoId = document.getElementById("video");
+                this.videoId.pause();
+            }
+        });
+    },
     fnClick() {
         let self = this;
-        let aw = window.screen.availWidth-100;
-        let ah = window.screen.availHeight-100;
+        let aw = window.screen.availWidth - 100;
+        let ah = window.screen.availHeight - 100;
         $(".centerHtml").off("changed.bs.select").on('changed.bs.select', '#mySelect', () => {
             let selectId = $('#mySelect').selectpicker('val');
             this.fnEquipmentTr(selectId);
@@ -145,13 +156,13 @@ publicObj.foodSupervision = {
             let oSrc = "",
                 oSrc2 = "";
             const sibId = $(this).siblings().data("id");
-            !$("#" + id).text() && fnHtml({
-                id,
-                fn: () => {
-                    $("#btnImgModel").addClass("active");
-                    if (id == "foodAnXinJian") self.videoId = document.getElementById("video");
-                }
-            });
+            // !$("#" + id).text() && fnHtml({
+            //     id,
+            //     fn: () => {
+            //         $("#btnImgModel").addClass("active");
+            //         if (id == "foodAnXinJian") self.videoId = document.getElementById("video");
+            //     }
+            // });
             if ($(this).index()) {
                 if (self.isAn) {
                     oSrc = "anxinjian2";
@@ -205,7 +216,7 @@ publicObj.foodSupervision = {
             }
         });
         $(".btnRigth").on("click", ".opens>span", function () {
-            window.open($(this).data("src"), '', 'width='+aw+',height='+ah+',top=20,left=40');
+            window.open($(this).data("src"), '', 'width=' + aw + ',height=' + ah + ',top=20,left=40');
         });
     }
 }
