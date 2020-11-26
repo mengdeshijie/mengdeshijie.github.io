@@ -48,6 +48,10 @@ body {
     src: url(BebasNeue_Bold.ttf);
 }
 
+@font-face {
+    font-family: "food";
+    src: url(DS-DIGIB.ttf)
+}
 
 /* font-family: light; */
 
@@ -123,11 +127,12 @@ a:hover {
 }
 
 .topHtml {
-	position: absolute;
-	left: 0;
-	right: 0;
-	z-index: 2;
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 2;
 }
+
 /* 区域选择 */
 
 .constituency {
@@ -317,7 +322,7 @@ body {
 }
 
 .overview {
-    height: calc(100vh - 205px);
+    height: calc(100vh - 235px);
 }
 
 .leftOverview {
@@ -532,6 +537,8 @@ table .icon-jurassic_warning {
     width: 400px;
     height: calc(100vh);
     position: absolute;
+    top: 0;
+    bottom: 0;
     right: 364px;
     background: linear-gradient(rgba(99, 73, 218, 0.8), rgba(135, 234, 255, 0.8));
     display: flex;
@@ -570,7 +577,7 @@ table .icon-jurassic_warning {
 .popup_box_active1 {
     transform: translate(0px, 0px);
     opacity: 1;
-	z-index: 10;
+    z-index: 10;
     transition: all 0.8s;
 }
 

@@ -1,4 +1,8 @@
 publicObj.foodSupervision = {
+    videoId: null,
+    isAn: true,
+    isZh: true,
+    index: 0,
     init() {
         this.fnAjax();
         this.fnPopup();
@@ -108,8 +112,23 @@ publicObj.foodSupervision = {
             });
         }
     },
+    fnVideo(index) {
+        let videoId = this.videoId;
+        if (videoId) {
+            index ? videoId.play() : videoId.pause();
+        }
+    },
+    fnClose(index, oSrc) {
+        this.isAn = true;
+        this.isZh = true;
+        this.index = 0;
+        $("#btnImgModel").removeClass("active");
+        $("#foodImgModel img").eq(index).attr("src", "../img/foodSupervision/" + oSrc + ".png");
+    },
     fnClick() {
         let self = this;
+        let aw = window.screen.availWidth-100;
+        let ah = window.screen.availHeight-100;
         $(".centerHtml").off("changed.bs.select").on('changed.bs.select', '#mySelect', () => {
             let selectId = $('#mySelect').selectpicker('val');
             this.fnEquipmentTr(selectId);
@@ -120,6 +139,73 @@ publicObj.foodSupervision = {
                 id = "list?" + id;
             }
             self.fnEquipmentTr(id);
+        });
+        $("#foodImgModel img").click(function () {
+            const id = $(this).data("id");
+            let oSrc = "",
+                oSrc2 = "";
+            const sibId = $(this).siblings().data("id");
+            !$("#" + id).text() && fnHtml({
+                id,
+                fn: () => {
+                    $("#btnImgModel").addClass("active");
+                    if (id == "foodAnXinJian") self.videoId = document.getElementById("video");
+                }
+            });
+            if ($(this).index()) {
+                if (self.isAn) {
+                    oSrc = "anxinjian2";
+                    self.isAn = !self.isAn;
+                } else {
+                    if (self.index) {
+                        oSrc = "anxinjian1";
+                        self.isAn = !self.isAn;
+                    } else {
+                        oSrc = "anxinjian2";
+                        self.isAn = false;
+                    }
+                }
+                oSrc2 = "zhuisu1";
+                self.index = 1;
+            } else { //0
+                if (self.isZh) {
+                    oSrc = "zhuisu2";
+                    self.isZh = !self.isZh;
+                } else {
+                    if (self.index) {
+                        oSrc = "zhuisu2";
+                        self.isZh = false;
+                    } else {
+                        oSrc = "zhuisu1";
+                        self.isZh = !self.isZh;
+                    }
+                }
+                oSrc2 = "anxinjian1";
+                self.index = 0;
+            }
+            $(this).attr("src", "../img/foodSupervision/" + oSrc + ".png");
+            $(this).siblings().attr("src", "../img/foodSupervision/" + oSrc2 + ".png");
+            if (oSrc == "zhuisu2" || oSrc == "anxinjian2") {
+                oSrc == "anxinjian2" ? self.fnVideo(1) : self.fnVideo(0);
+                $("#btnImgModel").addClass("active");
+            } else {
+                self.fnVideo(0);
+                $("#btnImgModel").removeClass("active");
+            }
+            $("#" + id).show();
+            $("#" + sibId).hide();
+        });
+        $(".btnRigth").on("click", ".closes", function () {
+            const index = $(this).index();
+            if (index) {
+                self.fnClose(0, "zhuisu1");
+            } else {
+                self.fnVideo(0);
+                self.fnClose(1, "anxinjian1");
+            }
+        });
+        $(".btnRigth").on("click", ".opens>span", function () {
+            window.open($(this).data("src"), '', 'width='+aw+',height='+ah+',top=20,left=40');
         });
     }
 }

@@ -1,0 +1,83 @@
+<style>
+    .foodZhuiSu>h2 {
+        font-size: 32px;
+        margin: 0 0 50px;
+    }
+
+    .foodZhuiSu .fontFamilyModel {
+        position: relative;
+        font-family: food;
+        font-size: 60px;
+        background-image: -webkit-linear-gradient(#87eaff, #624ad6);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .foodZhuiSu>ul li {
+        white-space: nowrap;
+        margin-right: 100px;
+    }
+
+    .foodZhuiSu>ul li:last-of-type {
+        margin-right: 0;
+    }
+
+    .foodZhuiSu>ul li>p,
+    .foodZhuiSu>h4 {
+        font-size: 22px;
+        color: #9fa0a0;
+    }
+
+
+    .foodZhuiSu>h4 {
+        margin: 30px 0;
+    }
+
+    .foodZhuiSu .imgs {
+        white-space: nowrap;
+    }
+
+    .foodZhuiSu .imgs>span {
+        cursor: pointer;
+        margin-right: 90px;
+    }
+</style>
+<div class="foodZhuiSu">
+    <h2>静安区超市追溯数据</h2>
+    <span class="closes" aria-hidden="true">&times;</span>
+    <ul class="flex">
+        <li>
+            <p>总批次数</p>
+            <span class="fontFamilyModel">708855</span>
+            <span>批</span>
+        </li>
+        <li>
+            <p>总赋码量</p>
+            <span class="fontFamilyModel">0</span>
+            <span>个</span>
+        </li>
+        <li>
+            <p>总进货数</p>
+            <span class="fontFamilyModel">33500</span>
+            <span>个</span>
+        </li>
+        <li>
+            <p>总产品数</p>
+            <span class="fontFamilyModel">11572</span>
+            <span>个</span>
+        </li>
+        <li>
+            <p>总供应商数</p>
+            <span class="fontFamilyModel">205</span>
+            <span>个</span>
+        </li>
+    </ul>
+    <h4>各超市数据查询</h4>
+    <div class="imgs opens">
+        <span data-src="http://saas.zhuisuyun.net/index"><img src="../img/foodSupervision/darunfa.png"></span>
+        <span data-src="http://saas.zhuisuyun.net/store/login"><img src="../img/foodSupervision/ngs.png"></span>
+        <span data-src="http://saas.zhuisuyun.net/alldays/login"><img src="../img/foodSupervision/haode.png"></span>
+        <span data-src="http://saas.zhuisuyun.net/store/login"><img src="../img/foodSupervision/kedi.png"></span>
+    </div>
+</div>
