@@ -216,6 +216,7 @@ publicObj.specialEquipment = {
 					}
 				]
 				$(".popup_box .bum_text").text(data[oIndex].code.substr(10));
+				$(".popup_box .floor").text(data[oIndex].location);
 				$(".popup_box .compName").text(data[oIndex].compName);
 				$(".popup_box .checkTime").text(data[oIndex].checkTime);
 				$(".popup_box .spanAbnormal").text(data[oIndex].runStatus);

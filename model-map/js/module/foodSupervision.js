@@ -1,5 +1,6 @@
 publicObj.foodSupervision = {
     videoId: null,
+    videoIds: null,
     isAn: true,
     isZh: true,
     index: 0,
@@ -119,6 +120,20 @@ publicObj.foodSupervision = {
             index ? videoId.play() : videoId.pause();
         }
     },
+    fnVideos(index) {
+        let videoId = this.videoIds;
+        if (videoId) {
+            if (index) {
+                for (var i = 0; i < videoId.length; i++) {
+                    videoId[i].play();
+                }
+            } else {
+                for (var i = 0; i < videoId.length; i++) {
+                    videoId[i].pause();
+                }
+            }
+        }
+    },
     fnClose(index, oSrc) {
         this.isAn = true;
         this.isZh = true;
@@ -130,7 +145,10 @@ publicObj.foodSupervision = {
         fnHtml("foodZhuiSu");
         fnHtml({
             id: "foodAnXinJian",
-            fn: () => this.videoId = document.getElementById("video")
+            fn: () => {
+                this.videoId = document.getElementById("video");
+                this.videoIds = document.querySelectorAll(".videoAn");
+            }
         });
     },
     fnClick() {
@@ -188,9 +206,15 @@ publicObj.foodSupervision = {
             $(this).siblings().attr("src", "../img/foodSupervision/" + oSrc2 + ".png");
             if (oSrc == "zhuisu2" || oSrc == "anxinjian2") {
                 // oSrc == "anxinjian2" ? self.fnVideo(1) : self.fnVideo(0);
+                if (oSrc == "anxinjian2") {
+                    self.fnVideos(1);
+                }
                 $("#btnImgModel").addClass("active");
             } else {
                 self.fnVideo(0);
+                if (oSrc == "anxinjian1") {
+                    self.fnVideos(0);
+                }
                 $("#btnImgModel").removeClass("active");
             }
             $("#" + id).show();

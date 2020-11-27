@@ -1,7 +1,7 @@
 <style>
     .foodAnXinJian .title,
-    .foodAnXinJian .info p {
-        max-width: 1026px;
+    .foodAnXinJian .info ul {
+        max-width: 958px;
     }
 
     .foodAnXinJian .title h2 {
@@ -10,7 +10,7 @@
     }
 
     .foodAnXinJian .title span,
-    .foodAnXinJian .info p {
+    .foodAnXinJian .info span {
         font-size: 22px;
     }
 
@@ -22,22 +22,39 @@
         margin: 12px 0 42px;
     }
 
+    .foodAnXinJian .info>ul {
+        margin-bottom: 0;
+    }
+
+    .foodAnXinJian .info>ul li {
+        width: 50%;
+        white-space: nowrap;
+    }
+
+    .foodAnXinJian .info>ul li img {
+        margin-right: 18px;
+    }
+
+    .foodAnXinJian .info>ul li:last-of-type {
+        width: 288px;
+        height: 52px;
+        background: -webkit-linear-gradient(var(--ns), var(--zs));
+        line-height: 52px;
+        border-radius: 30px;
+        cursor: pointer;
+    }
+
     .foodAnXinJian .anxinjian {
         width: 500px;
-        margin-left: 30px;
+        margin-left: 100px;
     }
 
-    .foodAnXinJian>h3 {
-        font-size: 26px;
-        margin-bottom: 30px;
-    }
-
-    .foodAnXinJian ul li {
+    .foodAnXinJian>ul li {
         text-align: center;
         margin-right: 20px;
     }
 
-    .foodAnXinJian ul li:last-of-type {
+    .foodAnXinJian>ul li:last-of-type {
         margin-right: 0px;
     }
 
@@ -45,7 +62,7 @@
         width: 375px;
     }
 
-    .foodAnXinJian ul li p {
+    .foodAnXinJian>ul li p {
         font-size: 22px;
         color: #9fa0a0;
         margin: 20px auto 0;
@@ -54,20 +71,42 @@
 
 <div class="foodAnXinJian">
     <span class="closes" aria-hidden="true">&times;</span>
-    <div class="flex spaceBetween alignCenter title opens">
-        <h2>“安心检”检测中心介绍</h2>
-        <span data-src="http://ftt.zhuisuyun.net/foodtest/login">“安心检”检测数据查询>></span>
+    <div class="flex spaceBetween alignCenter title">
+        <h2>“安心检”检测项目介绍</h2>
     </div>
     <div class="flex info">
-        <p>“安心检”中心实验室，围绕群众最关心的肉、蛋、奶、蔬菜、水果、食用油等重点食品，突出农兽药、添加剂、掺杂使假等重点问题，提供食品安全快速检测服务。检测中心目前对外提供多种检测项目，
-            其中包括农药残留（有机磷和氨基甲酯类）、瘦肉精（盐酸克伦特罗、莱克多巴胺、沙丁胺醇）、甲醛、孔雀石绿、吊白块、二氧化硫等，目前实验室检测检测项目已经包含6大类40余个品种。
-            “安心检”检测中心均聘用专业的检测人员从事检测工作，每日上午6:30前完成当日所有样品采样工作，8:30前完成并上报所有检测数据；一周7天，一年365天不间断检测。力求实现菜市场全覆盖、经营户全覆盖、应季品种全覆盖，确保食品在入口前，完成抽样检测工作，并在公示屏上公示每日实时的检测结果。
-            目前，静安区已建设了4个“安心检”检测中心实验室，每个检测中心，平均覆盖10家农贸市场。其中外环内覆盖9家菜市场，中环内覆盖10家菜市场，内环内覆盖19家菜市场。
-        </p>
+        <ul class="flex wrap alignCenter">
+            <li>
+                <img src="../img/foodSupervision/1.png">
+                <span>水产： 孔雀石绿，甲醛等</span>
+            </li>
+            <li>
+                <img src="../img/foodSupervision/2.png">
+                <span>蔬果： 农药残留，有机磷，克百威，毒死蜱等</span>
+            </li>
+            <li>
+                <img src="../img/foodSupervision/3.png">
+                <span>肉类： 瘦肉精，磺胺，注水肉等</span>
+            </li>
+            <li>
+                <img src="../img/foodSupervision/4.png">
+                <span>粮食及其制品： 吊白块，过氧化氢等</span>
+            </li>
+            <li>
+                <img src="../img/foodSupervision/5.png">
+                <span>干货： 二氧化硫，磷化铝等</span>
+            </li>
+            <li>
+                <img src="../img/foodSupervision/6.png">
+                <span>加工食品： 苯甲酸钠，山梨酸钾等</span>
+            </li>
+            <li class="opens">
+                <span data-src="http://ftt.zhuisuyun.net/foodtest/login">“安心检”检测数据查询>></span>
+            </li>
+        </ul>
         <video id="video" class="anxinjian" src="../video/anxinjian.mp4" preload poster="../video/anxinjian.jpg"
             controls></video>
     </div>
-    <!-- <h3>“安心检”实时监控</h3> -->
     <ul class="flex">
         <li><video class="videoAn" src="../video/zhijiang.mp4" preload poster="../video/zhijiang.jpg" controls
                 autoplay></video>
