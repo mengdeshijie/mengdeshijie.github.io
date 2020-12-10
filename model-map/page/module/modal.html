@@ -1,9 +1,8 @@
 <style>
-    #modal-container {
+	#modal-container {
         width: 400px;
 	    height: calc(100vh);
         position: absolute;
-        right: 1340px;
         display: flex;
         justify-content: center;
         align-items: flex-start;
@@ -14,12 +13,6 @@
         opacity: 1;
     }
 
-    /* #modal-container .modal-background {
-        display: table-cell;
-        background: rgba(0, 0, 0, 0.8);
-        text-align: center;
-        vertical-align: middle;
-    } */
 
     #modal-container .modal-background .modal-center {
         /* background: linear-gradient(to right, var(--zs), var(--ns)); */
@@ -42,22 +35,16 @@
 
     #modal-container.one {
 		z-index: 10;
+		right: 1340px;
         animation: unfoldIn 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
     }
-	/* 
-    #modal-container.one .modal-background .modal-center {
-        transform: scale(0);
-        animation: zoomIn 0.5s 0.1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
-    } */
 
     #modal-container.one.out {
 		z-index: 0;
+		right: 0px;
         animation: unfoldOut 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
     }
 
-    /* #modal-container.one.out .modal-background .modal-center {
-        animation: zoomOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
-    } */
 
     @keyframes unfoldIn {
         0% {
@@ -66,9 +53,6 @@
             opacity: 0;
         }
 
-        /* 50% {
-            transform: scaleY(0) scaleX(1);
-        } */
 
         100% {
             transform: translate(0, 0px);
@@ -161,8 +145,8 @@
         align-items: flex-start;
     }
     .modal-center .box_left::-webkit-scrollbar {
-    display: none;
-}
+		display: none;
+	}
 
     .modal-center .box_left div {
         height: 58px;
@@ -267,25 +251,6 @@
         display: block;
     }
 
-    /* 表格样式
-  .modal-center .box_right .table>thead {
-	display:table;
-	width: 100%;
-
-  }
-  .modal-center .box_right .table>tbody {
-	  max-height: 440px;
-	  display: block;
-	  overflow: scroll;
-	  width: 1104px;
-  }
-  .modal-center .box_right .table>tbody>tr {
-	width: 100%;
-	display: table;
-  }
-  table tbody::-webkit-scrollbar {
-    display: none;
-} */
     .noSpan {
         display: flex;
         justify-content: center;
@@ -295,50 +260,50 @@
     }
 </style>
 <div id="modal-container" class="one">
-    <div class="modal-background">
-        <div class="modal-center">
-            <div class="box_top flex">
-                <!-- <div class="box_top_img flex justifyCenter alignCenter">
+	<div class="modal-background">
+		<div class="modal-center">
+			<div class="box_top flex">
+				<!-- <div class="box_top_img flex justifyCenter alignCenter">
                     <img src="../img/index_frame.png" alt="">
                 </div> -->
-                <div class="box_top_content">
-                    <div id="compName" class="name_cn"></div>
-                    <!-- <div id="englishNames" class="name_en">Xingin Information Technology(Shanghai)Co.,Ltd.</div> -->
-                    <!-- <div id="businessScope" class="name_info"></div> -->
-                </div>
-                <img src="../img/modal_delete.png" alt="" class="modal_delete">
-            </div>
-            <div class="box_left flex column clearfix">
-                <div class="active">工商信息</div>
-                <div>企业架构图</div>
-                <div>股权穿透图</div>
-                <div data-otype="n">行政许可<span class="total xzxknum">(0)</span></div>
-                <div data-otype="tax">税务评级<span class="total supjnum">(0)</span></div>
-                <div data-otype="qualification">资质证书<span class="total zjzsnum">(0)</span></div>
-                <div data-otype="n">知识产权<span class="total zscqnum">(0)</span></div>
-                <div data-otype="report">企业年报<span class="total qynbnum">(0)</span></div>
-                <div data-otype="lawsuit">法律诉讼<span class="total flssnum">(0)</span></div>
-                <div data-otype="n">经营异常<span class="total jyysnum">(0)</span></div>
-                <div data-otype="punishment/gsj">行政处罚<span class="total xzcfnum">(0)</span></div>
-                <div data-otype="0">投诉举报<span class="total tsjbnnum">(0)</span></div>
-                <div data-otype="0">荣誉信息<span class="total ryxxnum">(0)</span></div>
-            </div>
-            <div class="box_right">
-                <div id="writing" style="text-align: center"></div>
-                <div class="flex justifyCenter alignCenter " style="text-align: center"></div>
-                <div class="flex justifyCenter alignCenter" style="text-align: center"></div>
-                <div style="text-align: center"></div>
-                <div style="text-align: center"></div>
-                <div style="text-align: center"></div>
-                <div style="text-align: center"></div>
-                <div style="text-align: center"></div>
-                <div style="text-align: center"></div>
-                <div style="text-align: center"></div>
-                <div style="text-align: center"></div>
-                <div style="text-align: center"></div>
-                <div style="text-align: center"></div>
-            </div>
-        </div>
-    </div>
+				<div class="box_top_content">
+					<div id="compName" class="name_cn"></div>
+					<!-- <div id="englishNames" class="name_en">Xingin Information Technology(Shanghai)Co.,Ltd.</div> -->
+					<!-- <div id="businessScope" class="name_info"></div> -->
+				</div>
+				<img src="../img/modal_delete.png" alt="" class="modal_delete">
+			</div>
+			<div class="box_left flex column clearfix">
+				<div class="active">工商信息</div>
+				<div>企业架构图</div>
+				<div>股权穿透图</div>
+				<div data-otype="n">行政许可<span class="total xzxknum">(0)</span></div>
+				<div data-otype="tax">税务评级<span class="total supjnum">(0)</span></div>
+				<div data-otype="qualification">资质证书<span class="total zjzsnum">(0)</span></div>
+				<div data-otype="n">知识产权<span class="total zscqnum">(0)</span></div>
+				<div data-otype="report">企业年报<span class="total qynbnum">(0)</span></div>
+				<div data-otype="lawsuit">法律诉讼<span class="total flssnum">(0)</span></div>
+				<div data-otype="n">经营异常<span class="total jyysnum">(0)</span></div>
+				<div data-otype="punishment/gsj">行政处罚<span class="total xzcfnum">(0)</span></div>
+				<div data-otype="0">投诉举报<span class="total tsjbnnum">(0)</span></div>
+				<div data-otype="0">荣誉信息<span class="total ryxxnum">(0)</span></div>
+			</div>
+			<div class="box_right">
+				<div id="writing" style="text-align: center"></div>
+				<div class="flex justifyCenter alignCenter " style="text-align: center"></div>
+				<div class="flex justifyCenter alignCenter" style="text-align: center"></div>
+				<div style="text-align: center"></div>
+				<div style="text-align: center"></div>
+				<div style="text-align: center"></div>
+				<div style="text-align: center"></div>
+				<div style="text-align: center"></div>
+				<div style="text-align: center"></div>
+				<div style="text-align: center"></div>
+				<div style="text-align: center"></div>
+				<div style="text-align: center"></div>
+				<div style="text-align: center"></div>
+			</div>
+		</div>
+	</div>
 </div>
 <script src="../js/module/modal.js" type="text/javascript" charset="utf-8"></script>

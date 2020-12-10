@@ -2,6 +2,7 @@ publicObj.partyBuildingManagement = {
 	init() {
 		this.fnAjax();
 		this.fnPopupListData();
+		$('.carousel').carousel();
 		this.fnClick();
 	},
 	fnAjax() {
