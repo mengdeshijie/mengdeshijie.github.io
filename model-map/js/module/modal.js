@@ -268,20 +268,26 @@ publicObj.modal = {
                 if (rows.length) {
                     let ths = arrs[k].th, oth = "", otr = "", tabelName = "";
                     for (let r in rows) {
-                        let otd = "";
+                        let otd = "",annualUrl="";
                         for (let o in ths) {
                             if (r == 0) {
                                 oth += `<th>${ths[o]}</th>`;
                             }
-                            otd += `<td>${rows[r][o]}</td>`;
+							if(index == 7 && rows[r].annualUrl && o=="annualReport"){
+								annualUrl = `data-annual="${rows[r].annualUrl}" class="annual"` 
+							}
+                            otd += `<td ${annualUrl}>${rows[r][o]}</td>`;
                         }
                         otr += `<tr>${otd}</tr>`;
                     }
                     if (arrs[k].name) {
                         tabelName = `<div><span class="tabelName">${arrs[k].name}</span><span class="tabelLength">${rows.length}</span></div>`
                     }
-                    let htmls = `<div class="datas table-responsive">${tabelName}<table class="table table-striped text-nowrap" data-toggle="table" data-height="4"><thead><tr>${oth}</tr></thead><tbody>${otr}</tbody></table></div>`;
+                    let htmls = `<div class="datas table-responsive">${tabelName}<table class="table table-striped text-nowrap" data-toggle="table" data-height="4"><thead><tr>${oth}</tr></thead><tbody id="${index == 7 ? "report" : ""}">${otr}</tbody></table></div>`;
                     boxRight.append(htmls);
+					if(index == 7){
+						this.fnReport();
+					}
                 } else {
                     if (!arrs[k].name) {
                         boxRight.html(this.fnImgs());
@@ -291,6 +297,15 @@ publicObj.modal = {
         }
         boxLeft.find(".total").text("(" + totals + ")");
     },
+	fnReport(){
+		$("#report>tr>td:last-of-type").click(function(){
+			const annualUrl = $(this).data("annual");
+			if(annualUrl){
+				publicObj.fnPdf("modal/"+annualUrl);
+			}
+			return false;
+		})
+	},
     fnclick() {
         let self = this;
         $('#modal-container').click(function () {
@@ -316,6 +331,7 @@ publicObj.modal = {
                 }
                 return false;
             }
+			
             if (!boxRight.find(".datas").length) {
                 let oType = $(this).data("otype");
                 if (oType == "0") {
