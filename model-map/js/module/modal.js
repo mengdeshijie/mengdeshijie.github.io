@@ -31,12 +31,8 @@ publicObj.modal = {
             name: "",
             total: "taxnum",
             th: {
-                nodeId: "统一社会信用代码",
-                evaluationAnnual: "评价年度",
-                creditRating: "纳税人信用级别",
-                taxType: "类型",
-                taxpayerNumber: "纳税人识别号",
-                evaluationUnit: "评价单位"
+                taxType: "企业名称",
+                taxpayerNumber: "2019年度纳税总额",
             },
         }],
         "5": [{

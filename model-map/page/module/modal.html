@@ -1,6 +1,5 @@
 <style>
 	#modal-container {
-        width: 400px;
 	    height: calc(100vh);
         position: absolute;
         display: flex;
@@ -9,11 +8,15 @@
         flex-direction: column;
         color: #fff;
         font-size: 16px;
-        transform: translate(800px, 0px);
+		transform: translateX(100vw);
         opacity: 1;
+		left: 0;
+		right: 0;
     }
 
-
+	#modal-container .modal-background{
+		margin: auto;
+	}
     #modal-container .modal-background .modal-center {
         /* background: linear-gradient(to right, var(--zs), var(--ns)); */
         display: inline-block;
@@ -35,13 +38,11 @@
 
     #modal-container.one {
 		z-index: 10;
-		right: 1340px;
         animation: unfoldIn 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
     }
 
     #modal-container.one.out {
 		z-index: 0;
-		right: 0px;
         animation: unfoldOut 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
     }
 
@@ -49,27 +50,25 @@
     @keyframes unfoldIn {
         0% {
             
-            transform: translate(400px, 0px);
+            transform: translateX(100vw);
             opacity: 0;
         }
 
 
         100% {
-            transform: translate(0, 0px);
+            transform: translateX(0px);
             opacity: 1;
         }
     }
 
     @keyframes unfoldOut {
         0% {
-            transform: translate(0, 0px);
+             transform: translateX(0px);
             opacity: 1;
         }
 
-      
-
         100% {
-            transform: translate(400px, 0px);
+           transform: translateX(100vw);
             opacity: 0;
         }
     }
@@ -101,7 +100,7 @@
     .modal-center .box_top {
         height: 200px;
         width: 100%;
-        padding: 45px 68px;
+        padding: 45px 0;
     }
 
     .modal-center .box_top .box_top_img {
@@ -119,6 +118,7 @@
     .box_top_content .name_cn {
         font-size: 32px;
         font-weight: 500;
+		padding-left: 68px;
     }
 
     .box_top_content .name_en {
@@ -280,7 +280,7 @@
 				<div>企业架构图</div>
 				<div>股权穿透图</div>
 				<div data-otype="n">行政许可<span class="total xzxknum">(0)</span></div>
-				<div data-otype="tax">税务评级<span class="total supjnum">(0)</span></div>
+				<div data-otype="tax">纳税信息<span class="total supjnum">(0)</span></div>
 				<div data-otype="qualification">资质证书<span class="total zjzsnum">(0)</span></div>
 				<div data-otype="n">知识产权<span class="total zscqnum">(0)</span></div>
 				<div data-otype="report">企业年报<span class="total qynbnum">(0)</span></div>
