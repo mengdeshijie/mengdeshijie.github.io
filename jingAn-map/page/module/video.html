@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="../../css/video-js.min.css" rel="stylesheet">
+    <style>
+        .video-js {
+            width: 880px;
+            height: 720px;
+        }
+
+        .vjs-error .vjs-error-display:before {
+            display: none;
+        }
+
+        .vjs-error .vjs-error-display .vjs-modal-dialog-content {
+            font-size: 2em;
+            top: 45%;
+            height: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <video id="videoId" class="video-js vjs-default-skin" autoplay controls>
+        <source src='' type='rtmp/flv' />
+    </video>
+</body>
+<script src="../../js/module/es5-sham.min.js"></script>
+<script src="../../js/module/video.min.js"></script>
+<script src="../../js/module/videojs-flash.min.js"></script>
+<script type="text/javascript">
+    var player;
+    (function () {
+        // "rtmp://rtmp01open.ys7.com/openlive/284dd73fef8f49cc8f226ac474a67138"
+        let osrc = window.parent.document.getElementById("supervise").getAttribute("data-id");
+        document.getElementById("videoId").setAttribute("src",osrc);
+        player = videojs('videoId', {
+            // "autoplay": true,
+            techOrder: ['flash']
+        });
+        player.src([{
+            type: 'rtmp/flv',
+            src: osrc
+        }]);
+        // player.play();
+    }());
+</script>
+
+</html>
