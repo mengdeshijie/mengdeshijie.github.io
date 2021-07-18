@@ -1,0 +1,129 @@
+<style>
+    .foodAnXinJian .title,
+    .foodAnXinJian .info ul {
+        max-width: 958px;
+    }
+
+    .foodAnXinJian .title h2 {
+        font-size: 32px;
+        margin-top: 0;
+    }
+
+    .foodAnXinJian .title span,
+    .foodAnXinJian .info span {
+        font-size: 22px;
+    }
+
+    .foodAnXinJian .title span {
+        cursor: pointer;
+    }
+
+    .foodAnXinJian .info {
+        margin: 12px 0 42px;
+    }
+
+    .foodAnXinJian .info>ul {
+        margin-bottom: 0;
+    }
+
+    .foodAnXinJian .info>ul li {
+        width: 50%;
+        white-space: nowrap;
+    }
+
+    .foodAnXinJian .info>ul li img {
+        margin-right: 18px;
+    }
+
+    .foodAnXinJian .info>ul li:last-of-type {
+        width: 288px;
+        height: 52px;
+        background: -webkit-linear-gradient(var(--ns), var(--zs));
+        line-height: 52px;
+        border-radius: 30px;
+        cursor: pointer;
+    }
+
+    .foodAnXinJian .anxinjian {
+        width: 500px;
+        margin-left: 100px;
+    }
+
+    .foodAnXinJian>ul li {
+        text-align: center;
+        margin-right: 20px;
+    }
+
+    .foodAnXinJian>ul li:last-of-type {
+        margin-right: 0px;
+    }
+
+    .foodAnXinJian .videoAn {
+        width: 375px;
+    }
+
+    .foodAnXinJian>ul li p {
+        font-size: 22px;
+        color: #9fa0a0;
+        margin: 20px auto 0;
+    }
+</style>
+
+<div class="foodAnXinJian">
+    <span class="closes" aria-hidden="true">&times;</span>
+    <div class="flex spaceBetween alignCenter title">
+        <h2>“安心检”检测项目介绍</h2>
+    </div>
+    <div class="flex info">
+        <ul class="flex wrap alignCenter">
+            <li>
+                <img src="../img/foodSupervision/1.png">
+                <span>水产： 孔雀石绿，甲醛等</span>
+            </li>
+            <li>
+                <img src="../img/foodSupervision/2.png">
+                <span>蔬果： 农药残留，有机磷，克百威，毒死蜱等</span>
+            </li>
+            <li>
+                <img src="../img/foodSupervision/3.png">
+                <span>肉类： 瘦肉精，磺胺，注水肉等</span>
+            </li>
+            <li>
+                <img src="../img/foodSupervision/4.png">
+                <span>粮食及其制品： 吊白块，过氧化氢等</span>
+            </li>
+            <li>
+                <img src="../img/foodSupervision/5.png">
+                <span>干货： 二氧化硫，磷化铝等</span>
+            </li>
+            <li>
+                <img src="../img/foodSupervision/6.png">
+                <span>加工食品： 苯甲酸钠，山梨酸钾等</span>
+            </li>
+            <li class="opens">
+                <span data-src="http://ftt.zhuisuyun.net/foodtest/login">“安心检”检测数据查询>></span>
+            </li>
+        </ul>
+        <video id="video" class="anxinjian" src="../video/anxinjian.mp4" preload poster="../video/anxinjian.jpg"
+            controls></video>
+    </div>
+    <ul class="flex">
+        <li><video class="videoAn" src="../video/zhijiang.mp4" preload poster="../video/zhijiang.jpg" controls
+                autoplay></video>
+            <p>芷江实验室</p>
+        </li>
+        <li><video class="videoAn" src="../video/wuding.mp4" preload poster="../video/wuding.jpg" controls
+                autoplay></video>
+            <p>武定实验室</p>
+        </li>
+        <li><video class="videoAn" src="../video/jingyu.mp4" preload poster="../video/jingyu.jpg" controls
+                autoplay></video>
+            <p>靖宇实验室</p>
+        </li>
+        <li><video class="videoAn" src="../video/luyuan.mp4" preload poster="../video/luyuan.jpg" controls
+                autoplay></video>
+            <p>绿园实验室</p>
+        </li>
+    </ul>
+
+</div>
