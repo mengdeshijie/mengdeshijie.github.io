@@ -1,0 +1,1 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0b2cf8"],{2664:function(n,t,e){"use strict";e.r(t);var s=function(){var n=this,t=n.$createElement,e=n._self._c||t;return e("div",{staticClass:"aboutUs"},[n._v(" 关于我们 ")])},a=[],c={name:"aboutUs",components:{}},u=c,o=e("2877"),l=Object(o["a"])(u,s,a,!1,null,null,null);t["default"]=l.exports}}]);

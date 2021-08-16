@@ -1,0 +1,1 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d21a794"],{bc52:function(t,n,e){"use strict";e.r(n);var a=function(){var t=this,n=t.$createElement,e=t._self._c||n;return e("div",{staticClass:"creatorPlatform"},[t._v(" 创作者平台 ")])},c=[],r={name:"creatorPlatform",components:{}},o=r,l=e("2877"),s=Object(l["a"])(o,a,c,!1,null,null,null);n["default"]=s.exports}}]);
