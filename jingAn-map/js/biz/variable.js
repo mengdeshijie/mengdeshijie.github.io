@@ -1,5 +1,7 @@
 var variable = {};
 var threeObj = {
+  "ourls": "http://113.207.106.32:8092/model-map/2",
+  "ourPdf": "/model-map/2",
   lightIamp: 3,
   directionalLightIamp: 0,
   outlinePass: { //鼠标移入模型边高亮
@@ -31,22 +33,23 @@ var floorArr = ['A001-A001', "C001-I001", "E001-A001", "E001-B001", "F001-A001",
 var modules = [].concat(floorArr, ["gx", "kjz001", "kjz002", "kjz003", "kjz004", "kjz005", "uv", "wjh", "dimian", "dian", "ico", "qy"]);
 
 // var modules = [].concat(floorArr, ["gx", "dimian", "dian", "uv", "qy", "ico"]);
+// var modules = ["gx", "dimian", "dian", "qy", "ico"];
 //模型动画-电梯动态加载名称
 var moduleMixer = ["A001A001Dianti", "A001B001Dianti", "A001C001Dianti"];
 //不可交互对象名称集合，支持使用分组将子对象全部包含为不可交互
-var nonInteractiveObjectNames = ["dian", "dimian", "qiao", "kjz001", "kjz002", "kjz003", "kjz004", "kjz005", "kjz006", "kjz007", "kjz008", "kjz009", "4s001", "4s002", "4s003", "4s004", "4s005", "4s006", "4s007", "cy001", "cy002", "cy003", "cy004", "cy005", "cy006", "cy007", "cy008", "gl001", "gl002", "jyz001", "jyz002", "jyz003", "ty001", "ty002", "ty003", "ty004", "ty005", "yd001", "yd002", "yd003", "yd004", "yd005", "yjd001", "yjd002", "zxc001", "zxc002", "zxc003", "zxc004", "dsqy_q", "lr_q", "sbyzx_q", "xx_q", "ylf_q", "zbjjy_q", "zhy_q", "ztsdgc_q", "g001", "g002", "g003", "g004", "g005", "s001", "s002", "s003", "s004", "s005", "s006", "s007", "uv001", "uv002", "uv003", "uv004", "dsqy_k", "lr_k", "sbyzx_k", "xx_k", "zbjjy_k", "zhy_k", "ztsdgc_k", "A001-A001-Dianti01", "A001-A001-Dianti02", "A001-A001-Dianti03", "A001-A001-Dianti04", "A001-A001-Dianti05", "A001-A001-Dianti06", "A001-A001-Diantizhu01", "A001-B001-Dianti01", "A001-B001-Dianti02", "A001-B001-Dianti03", "A001-B001-diantizhu", "A001-C001-Dianti01", "A001-C001-Dianti02", "A001-C001-Dianti03", "A001-C001-Diantizhu"];
+var nonInteractiveObjectNames = ["dian", "dimian", "qiao", "kjz001", "kjz002", "kjz003", "kjz004", "kjz005", "kjz006", "kjz007", "kjz008", "kjz009", "dsqy_q", "lr_q", "sbyzx_q", "xx_q", "ylf_q", "zbjjy_q", "zhy_q", "ztsdgc_q", "g001", "g002", "g003", "g004", "g005", "s001", "s002", "s003", "s004", "s005", "s006", "s007", "uv001", "uv002", "uv003", "uv004", "dsqy_k", "lr_k", "sbyzx_k", "xx_k", "zbjjy_k", "zhy_k", "ztsdgc_k", "A001-A001-Dianti01", "A001-A001-Dianti02", "A001-A001-Dianti03", "A001-A001-Dianti04", "A001-A001-Dianti05", "A001-A001-Dianti06", "A001-A001-Diantizhu01", "A001-B001-Dianti01", "A001-B001-Dianti02", "A001-B001-Dianti03", "A001-B001-diantizhu", "A001-C001-Dianti01", "A001-C001-Dianti02", "A001-C001-Dianti03", "A001-C001-Diantizhu"];
 
 var nonInteractiveModulesNames = ['ico', 'qy']; //这里是模型模块名称
-
-var noIconMove = ["cy001", "cy002", "cy003", "cy004", "cy005", "cy006", "cy007", "cy008", "gl001", "gl002"];
-var iconPng = [].concat(noIconMove, ["4s001", "4s002", "4s003", "4s004", "4s005", "4s006", "4s007", "jyz001", "jyz002", "jyz003", "ty001", "ty002", "ty003", "ty004", "ty005", "yd001", "yd002", "yd003", "yd004", "yd005", "yjd001", "yjd002", "zxc001", "zxc002", "zxc003", "zxc004"]); //UV动画对象
+//和数据交互可以移动过去的("cy001","cy004",)位置已变更，代码创建 
+var noIconMove = ["cy001", "cy004", "cy002", "cy003", "cy005", "cy006", "cy007", "cy008", "gl001", "gl002", "ty001", "ty002", "ty003", "ty004", "ty005"];
+var iconPng = [].concat(noIconMove, ["4s001", "4s002", "4s003", "4s004", "4s005", "4s006", "4s007", "jyz001", "jyz002", "jyz003", "yd001", "yd002", "yd003", "yd004", "yd005", "yjd001", "yjd002", "zxc001", "zxc002", "zxc003", "zxc004"]);
 
 var transparentTreatment = ["uv", "qy"]; //透明处理
 //UV动画对象
 var updaterArrOffset = [{
     name: ["zbjjy_q", "dsqy_q", "ylf_q", "lr_q", "zhy_q", "ztsdgc_q", "sbyzx_q", "xx_q"],
     offset: "y",
-    value: 0.001,
+    value: 0.002,
     direction: "+"
   },
   {
@@ -62,6 +65,53 @@ var updaterArrOffset = [{
     direction: "+"
   }
 ]
+//模型icon
+let playIcon = [{
+  name: "cy001",
+  position: [32, 0.84, -78.92]
+}, {
+  name: "cy004",
+  position: [38, 0.84, -78.29]
+}, {
+  name: "ty006",
+  position: [40.66, 0.84, -78.29]
+}, {
+  name: "ty007",
+  position: [32.27, 0.84, -78.92]
+}, {
+  name: "ty008",
+  position: [-76.07, -1.12, 46.51]
+}, {
+  name: "ty009",
+  position: [-127.05, -0.99, 77.67]
+}, {
+  name: "ty010",
+  position: [-77.28, 0.55, 0.25]
+}, {
+  name: "ty011",
+  position: [-7.61, -0.63, 0.95]
+}, {
+  name: "ty012",
+  position: [112.19, 0.22, -30.15]
+}, {
+  name: "ty013",
+  position: [141.81, -0.6, -25.72]
+}, {
+  name: "ty014",
+  position: [-25.24, -1.74, 48.06]
+}, {
+  name: "ty015",
+  position: [-110.35, 3.61, 62.18]
+}, {
+  name: "ty016",
+  position: [-101.72, 1.1, 63]
+}, {
+  name: "ty017",
+  position: [-96.68, 0.65, 49.31]
+}, {
+  name: "ty018",
+  position: [69.78, 0.9, -3.4]
+}];
 var objName = {
   "C001-A001": "智汇园-A栋",
   "C001-B001": "智汇园-B栋",

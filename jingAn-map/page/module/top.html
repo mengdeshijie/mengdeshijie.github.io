@@ -39,6 +39,7 @@
     <span class="iconfont icon-tuichu"></span>
   </div>
   <div id="yanJingIcon" class="handle_box_yanjing flex spaceBetween alignCenter">
+    <div class="yanjingjiantop"></div>
     <div class="handle_sel flex spaceBetween alignCenter" data-id="yd">
       <img src="../img/overview_set.png" alt="">药品零售
     </div>
@@ -84,40 +85,45 @@
       setInterval(() => {
         timeEl.text(fnDataTime(2));
       }, 1000);
+      this.fnCenterInit(["yd", "zxc", "jyz", "yjd", "gl", "4s"]);
       this.fnClick();
     },
     fnCenterInit(name) {
+      const arrs = name;
       $("#labelRenderer .labelImg").addClass("hide");
-      $("#labelRenderer " + name).removeClass("hide");
-
-      $("#yanJingIcon .handle_sel>img").attr("src", "../img/overview_set1.png");
-      $("#yanJingIcon " + name + ">img").attr("src", "../img/overview_set.png");
+      $("#yanJingIcon .handle_sel").each(function (index, el) {
+        const elClass = $(el).data("id");
+        if (arrs.includes(elClass)) {
+          $(el).show();
+          //食品监管ty ,cy默认不显示
+          if (elClass != "ty" && elClass != "cy") {
+            $(el).find("img").attr("src", "../img/overview_set.png");
+            $("#labelRenderer ." + elClass).removeClass("hide");
+          }
+        } else {
+          $(el).hide();
+        }
+      });
     },
     fnClick() {
       let self = this;
       $("#headerUl li").click(function () {
         $("#headerUl li").removeClass("active");
         $(this).addClass("active");
+        $("#yanJingIcon").show();
+        $(".handleicon .icon-yanjing").show();
         let eleId = $(this).data("id");
         $(".centerHtml").attr("id", eleId);
         eleId != "specialEquipmentHtml" && publicObj.specialEquipment.elHls && publicObj
           .specialEquipment.elHls.media && publicObj.specialEquipment.elHls.destroy();
         $("#A001-A001-Diantizhu01").addClass("hide");
+        selectpickerRender(); //清楚输入框状态
         switch (eleId) {
           case "overviewHtml":
             fnHtml({
               id: eleId,
               fn: () => {
-                $("#yanJingIcon .handle_sel").each(function (index, el) {
-                  const elClass = $(el).data("id");
-                  if (index < 6) {
-                    $("#labelRenderer ." + elClass).removeClass("hide");
-                    $(el).find("img").attr("src", "../img/overview_set.png");
-                  } else {
-                    $("#labelRenderer ." + elClass).addClass("hide");
-                    $(el).find("img").attr("src", "../img/overview_set1.png");
-                  }
-                });
+                self.fnCenterInit(["yd", "zxc", "jyz", "yjd", "gl", "4s"]);
               }
             });
             break;
@@ -127,7 +133,7 @@
               id: eleId,
               fn: () => {
                 publicObj.fnAreaHtml('特种设备', 1);
-                self.fnCenterInit(".gl");
+                self.fnCenterInit(["gl"]);
                 $("#A001-A001-Diantizhu01").removeClass("hide");
               }
             });
@@ -138,8 +144,7 @@
               id: eleId,
               fn: () => {
                 publicObj.fnAreaHtml('食品监管', 2);
-                self.fnCenterInit(".cy");
-
+                self.fnCenterInit(["cy", "ty"]);
               }
             });
             break;
@@ -148,11 +153,8 @@
             fnHtml({
               id: eleId,
               fn: () => {
-                $("#yanJingIcon .handle_sel").each(function (index, el) {
-                  const elClass = $(el).data("id");
-                  $("#labelRenderer ." + elClass).addClass("hide");
-                  $(el).find("img").attr("src", "../img/overview_set1.png");
-                })
+                $("#yanJingIcon").hide();
+                $(".handleicon .icon-yanjing").hide();
                 publicObj.fnAreaHtml('企业查询', "internetTbody");
               }
             });
@@ -183,12 +185,10 @@
         }
         moveBack();
       });
-      let arr = [];
       $("#topHtml").off("click").on("click", ".handle_sel", function (event) {
         event.stopPropagation();
-        let oIndex = $(this).index();
         let oId = $(this).data("id");
-        let osrc = $(".handle_sel>img").eq(oIndex);
+        let osrc = $(this).find("img");
         let isshow = "show";
         if (osrc.attr("src") == "../img/overview_set1.png") {
           osrc.attr("src", "../img/overview_set.png");

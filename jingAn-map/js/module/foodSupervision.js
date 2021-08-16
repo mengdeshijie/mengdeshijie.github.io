@@ -3,6 +3,7 @@ publicObj.foodSupervision = {
   videoIds: null,
   isAn: true,
   isZh: true,
+  trClick: "all",
   index: 0,
   init() {
     this.fnAjax();
@@ -46,11 +47,12 @@ publicObj.foodSupervision = {
     return dateArray;
   },
   fnPopup() {
-    var a = false,
+    let a = false,
       b = false,
       aIndex = null,
       bIndex = null,
-      cIndex = null
+      cIndex = null,
+      self = this;
     $(".table_box .table>tbody>tr").on("mouseover", function () {
       aIndex = $(this).index();
       a = true
@@ -75,8 +77,10 @@ publicObj.foodSupervision = {
         $(".popup_box .tel").text(data.tel);
         $(".popup_box .oaddress").text(data.address);
         $(".popup_box .police").text(Math.ceil(Math.random() * 3));
-        if (data.mark && data.mark.indexOf("dxcy") != -1) {
-          fnIconMove("cy00" + data.mark.charAt(4));
+        const trClick = self.trClick;
+        if (data[trClick]) {
+          //地图icon移动到指定位置
+          fnIconMove(data[trClick]);
         }
         if (bIndex != cIndex) {
           if (cIndex == null) {
@@ -94,7 +98,6 @@ publicObj.foodSupervision = {
         $(".table_box .table>tbody>tr").eq(oIndex).addClass("activel").siblings().removeClass("activel");
         fnIconfont(a, b, aIndex, bIndex);
       })
-
     });
     $(".popup_box .close").click(function () {
       bIndex = $(this).index();
@@ -180,10 +183,27 @@ publicObj.foodSupervision = {
     });
     $("#foodLeftTop>div .info_num").click(function () {
       let id = $(this).data("id");
+      let trClick = "all";
+      let trLabelTo = "";
+      if (id == "tianying=1") {
+        trClick = "mark";
+        trLabelTo = "ty";
+      } else if (id == "countType=大型饭店") {
+        trClick = "complexName";
+        trLabelTo = "cy";
+      }
+      let labelHide = trLabelTo == "ty" ? "cy" : "ty"
       if (id != "all") {
         id = "list?" + id;
       }
+      self.trClick = trClick;
       self.fnEquipmentTr(id);
+      if (trLabelTo) {
+        labelTo(trLabelTo, "show");
+        labelTo(labelHide, "hide");
+      } else if (id == "all") {
+        labelTo(labelHide, "hide");
+      }
     });
     $("#foodImgModel img").click(function () {
       const id = $(this).data("id");

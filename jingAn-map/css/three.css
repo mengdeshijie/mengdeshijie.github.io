@@ -89,7 +89,7 @@
   position: relative;
 }
 
-.labelTitle {
+/* .labelTitle {
   margin-top: -28px;
   position: relative;
   padding: 8px;
@@ -98,13 +98,29 @@
   border-radius: 8px;
   text-align: center;
   min-width: 70px;
+} */
+.labelTitle {
+  background-image: url(../img/title-bj.png);
+  background-size: 100% 100%;
+  position: relative;
+  text-align: center;
+  margin-top: -8px;
+  width: 96px;
+  height: 35px;
+}
+
+.labelTitle span {
+  position: absolute;
+  left: 0;
+  right: 0;
+  line-height: 30px;
 }
 
 .labelTitle .pulse {
   display: none;
 }
 
-.labelTitle:before,
+/* .labelTitle:before,
 .labelTitle:after {
   box-sizing: content-box;
   width: 0px;
@@ -116,9 +132,9 @@
   display: block;
   content: '';
   padding: 0;
-}
+} */
 
-.labelTitle:before {
+/* .labelTitle:before {
   bottom: -15px;
   border-top: 8px solid #000000;
   border-bottom: 8px solid transparent;
@@ -134,7 +150,7 @@
   border-left: 9px solid transparent;
   border-right: 9px solid transparent;
   z-index: 1;
-}
+} */
 
 .label2D .labelImg>img:hover {
   cursor: pointer;
